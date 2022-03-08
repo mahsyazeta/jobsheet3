@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-void void main() {
-  runApp(MyApp());
+void main() {
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -72,12 +71,68 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
+class Output extends StatelessWidget {
+  const Output({
+    Key? key,
+    required double kelvin,
+    required double reamur,
+  })  : _kelvin = kelvin,
+        _reamur = reamur,
+        super(key: key);
 
-class MyApp extends StatelessWidget {
+  final double _kelvin;
+  final double _reamur;
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Column(
+          children: [
+            Text('Suhu Dalam Kelvin'),
+            Container(
+              margin: const EdgeInsets.all(15),
+              child: Text(
+                '$_kelvin',
+                style: TextStyle(fontSize: 30),
+              ),
+            ),
+          ],
+        ),
+        Column(
+          children: [
+            Text('Suhu Dalam Reamur'),
+            Container(
+              margin: const EdgeInsets.all(15),
+              child: Text(
+                '$_reamur',
+                style: TextStyle(fontSize: 30),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
   }
-  
+}
+
+class Input extends StatelessWidget {
+  const Input({
+    Key? key,
+    required this.controllerInput,
+  }) : super(key: key);
+
+  final TextEditingController controllerInput;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controllerInput,
+      decoration: const InputDecoration(
+        hintText: 'Masukkan Suhu Dalam Celcius',
+      ),
+      keyboardType: TextInputType.number,
+    );
+  }
 }
